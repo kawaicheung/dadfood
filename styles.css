@@ -5,7 +5,7 @@
   --img-w: calc(var(--cell-h) * 4 / 3);
 
   --gap-cell: 2px;
-  --gap-section: 32px;
+  --gap-section: clamp(1vw, 20px, 2vw);
   --divider-margin: 20px;
 
   --clr-bg: #f2ece4;
@@ -13,7 +13,7 @@
   --clr-border: #b8ad9e;
   --clr-text: #2c2318;
 
-  --font-body: 'Cormorant', Georgia, serif;
+  --font-body: serif;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -49,7 +49,7 @@ body {
   gap: var(--gap-section);
   height: var(--cell-h);
   flex-shrink: 0;
-  padding-top: 2.4rem;
+  padding: 1rem;
 }
 
 /* ─── Sections ───────────────────────────────────────────────────────────── */
@@ -77,7 +77,6 @@ body {
   gap: 0.5em;
 
   & .time-label {
-    font-style: italic;
     font-weight: 400;
     text-transform: none;
     letter-spacing: 0.02em;
@@ -85,9 +84,13 @@ body {
   }
 
   & .realtime {
+    font-family: sans-serif;
     font-style: normal;
-    font-weight: 300;
-    color: color-mix(in srgb, var(--clr-text) 50%, transparent);
+    font-weight: 800;
+    font-size: 80%;
+    letter-spacing: -0.02rem;
+
+    color: color-mix(in srgb, var(--clr-text) 90%, transparent);
 
     &::before {
       content: '→ ';
@@ -109,8 +112,8 @@ body {
   }
 }
 
-/* ─── Intro block ────────────────────────────────────────────────────────── */
-.intro-block {
+/* ─── Gather block ────────────────────────────────────────────────────────── */
+.gather-block {
   display: flex;
   align-items: stretch;
   height: 100%;
@@ -119,28 +122,28 @@ body {
   & .img-block {
     width: var(--img-w);
   }
-}
 
-.ingredients {
-  width: 14ch;
-  display: flex;
-  align-items: center;
-  padding-inline: 1.4rem;
-  border-left: 1px solid var(--clr-border);
+  .ingredients {
+    border: solid 1px red;
+    width: 20ch;
+    display: flex;
+    align-items: center;
+    padding-inline: 1.4rem;
 
-  & ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
+    & ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
 
-  & li {
-    font-size: clamp(0.6rem, 1.4vh, 0.85rem);
-    font-weight: 300;
-    line-height: 2;
-    letter-spacing: 0.03em;
-    color: var(--clr-text);
-    white-space: nowrap;
+    & li {
+      font-size: calc(1.5 * clamp(0.6rem, 1.4vh, 0.85rem));
+      font-weight: 300;
+      line-height: 1.4;
+      letter-spacing: 0.03em;
+      color: var(--clr-text);
+      white-space: nowrap;
+    }
   }
 }
 
@@ -296,7 +299,8 @@ body {
 .divider {
   flex-shrink: 0;
   width: 0;
-  height: 100%;
+  height: 100vh;
+  margin-top: calc(-1 * (100vh - var(--cell-h)) / 2);
   margin-inline: var(--divider-margin);
   border-left: 1px dashed var(--clr-border);
 }
