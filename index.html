@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Layout</title>
+  <link rel="stylesheet" href="clear.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page">
+    <main class="stage">
+
+      <!-- § Intro -->
+      <div class="cell cell--intro">
+        <div class="cell-img"></div>
+        <div class="cell-content cell-content--centered">
+          <h1>Bolognese</h1>
+          <h2>A slow-cooked ragù with farfalle</h2>
+          <div class="intro-times">
+            <span>Prep/Cook <em>30 min</em></span>
+            <span>Finish <em>11 min</em></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- § Gather -->
+      <div class="section">
+        <p class="guidepost">Gather</p>
+        <div class="intro-block">
+          <figure class="img-block">
+            <img src="food.png" alt="Ingredients spread" />
+          </figure>
+          <aside class="ingredients">
+            <ul>
+              <li>Farfalle pasta</li>
+              <li>Ground beef</li>
+              <li>Rao's marinara</li>
+              <li>Carrots</li>
+              <li>Celery</li>
+              <li>Mushrooms</li>
+              <li>Shallot</li>
+              <li>Fresh parsley</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+
+      <!-- § Prep/Cook -->
+      <div class="section">
+        <p class="guidepost">
+          Prep/Cook — <span class="time-label">30 minutes</span>
+          <span class="realtime" id="realtime-1"></span>
+          <button class="reset-btn" data-minutes="30" data-target="realtime-1">↺</button>
+        </p>
+        <div class="grid">
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-1"></span>
+                <button class="cell-reset-btn" data-minutes="5" data-target="ct-1">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step one</h3>
+              <p>Dice the shallot, carrots, and celery into a fine mirepoix.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-2"></span>
+                <button class="cell-reset-btn" data-minutes="8" data-target="ct-2">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step two</h3>
+              <p>Sauté vegetables in olive oil over medium heat until soft.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-3"></span>
+                <button class="cell-reset-btn" data-minutes="7" data-target="ct-3">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step three</h3>
+              <p>Add ground beef and brown, breaking up as it cooks.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-4"></span>
+                <button class="cell-reset-btn" data-minutes="20" data-target="ct-4">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step four</h3>
+              <p>Pour in marinara, simmer on low for 20 minutes.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-5"></span>
+                <button class="cell-reset-btn" data-minutes="10" data-target="ct-5">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step five</h3>
+              <p>Boil farfalle until al dente, reserve a cup of pasta water.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-6"></span>
+                <button class="cell-reset-btn" data-minutes="2" data-target="ct-6">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Step six</h3>
+              <p>Toss pasta with sauce, finish with fresh parsley.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- § Finish -->
+      <div class="section">
+        <p class="guidepost">
+          Finish — <span class="time-label">11 minutes</span>
+          <span class="realtime" id="realtime-2"></span>
+          <button class="reset-btn" data-minutes="11" data-target="realtime-2">↺</button>
+        </p>
+        <div class="grid">
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-7"></span>
+                <button class="cell-reset-btn" data-minutes="5" data-target="ct-7">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Plating</h3>
+              <p>Serve in wide bowls, garnish generously with parsley and pecorino.</p>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="cell-img"><img src="food.png" alt="" />
+              <div class="cell-timer">
+                <span class="cell-realtime" id="ct-8"></span>
+                <button class="cell-reset-btn" data-minutes="3" data-target="ct-8">↺</button>
+              </div>
+            </div>
+            <div class="cell-content">
+              <h3>Wine pairing</h3>
+              <p>A medium-bodied Sangiovese cuts through the richness perfectly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section">
+        <p class="guidepost">Serve</p>
+        <figure class="img-block">
+          <img src="food.png" alt="Ingredients spread" />
+        </figure>
+      </div>
+
+    </main>
+  </div>
+  <script src="timers.js"></script>
+</body>
+</html>
