@@ -4,7 +4,7 @@
   --cell-w: calc(var(--cell-h) * 0.5);
   --img-w: calc(var(--cell-h) * 4 / 3);
 
-  --gap-cell: 2px;
+  --gap-cell: 1em;
   --gap-section: clamp(1vw, 20px, 2vw);
   --divider-margin: 20px;
 
@@ -13,7 +13,8 @@
   --clr-border: #b8ad9e;
   --clr-text: #2c2318;
 
-  --font-body: serif;
+  --font-body: 'Google Sans', sans-serif;
+  --fs: clamp(0.5rem, 1.1vh, 0.7rem);
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -67,9 +68,8 @@ body {
   left: 0;
   transform: translateY(calc(-100% - 10px));
   white-space: nowrap;
-  font-size: clamp(0.91rem, 1.96vh, 1.19rem);
-  font-weight: 300;
-  letter-spacing: 0.08em;
+  font-size: calc(var(--fs) * 2);
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--clr-text);
   display: flex;
@@ -77,7 +77,6 @@ body {
   gap: 0.5em;
 
   & .time-label {
-    font-weight: 400;
     text-transform: none;
     letter-spacing: 0.02em;
     color: var(--clr-border);
@@ -86,21 +85,15 @@ body {
   & .realtime {
     font-family: sans-serif;
     font-style: normal;
-    font-weight: 800;
-    font-size: 80%;
     letter-spacing: -0.02rem;
 
     color: color-mix(in srgb, var(--clr-text) 90%, transparent);
-
-    &::before {
-      content: '→ ';
-      opacity: 0.5;
-    }
   }
 }
 
 .reset-btn {
-  font-size: 0.85em;
+  font-size: 2em;
+  font-weight: 400;
   color: var(--clr-border);
   opacity: 0.7;
   transition: opacity 0.15s ease, transform 0.15s ease;
@@ -137,7 +130,7 @@ body {
     }
 
     & li {
-      font-size: calc(1.5 * clamp(0.6rem, 1.4vh, 0.85rem));
+      font-size: calc(var(--fs) * 1.9);
       font-weight: 300;
       line-height: 1.4;
       letter-spacing: 0.03em;
@@ -179,6 +172,8 @@ body {
   background: var(--clr-cell);
   overflow: hidden;
   transition: background 0.2s ease;
+  padding: var(--fs);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 20px 20px -20px;
 
   &.cell--intro {
     width: var(--cell-w);
@@ -193,14 +188,14 @@ body {
     gap: 0.6em;
 
     & h1 {
-      font-size: clamp(1.4rem, 3.5vh, 2.4rem);
+      font-size: calc(var(--fs) * 3.2);
       font-weight: 300;
       font-style: italic;
       letter-spacing: 0.04em;
     }
 
     & h2 {
-      font-size: clamp(0.7rem, 1.5vh, 1rem);
+      font-size: calc(var(--fs) * 1.35);
       font-weight: 300;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -212,7 +207,7 @@ body {
       flex-direction: column;
       gap: 0.25em;
       margin-top: 0.6em;
-      font-size: clamp(0.65rem, 1.3vh, 0.85rem);
+      font-size: calc(var(--fs) * 1.2);
       font-weight: 300;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -250,7 +245,7 @@ body {
       gap: 0.3em;
       background: color-mix(in srgb, var(--clr-bg) 80%, transparent);
       padding: 0.2em 0.45em;
-      font-size: clamp(0.55rem, 1.1vh, 0.72rem);
+      font-size: var(--fs);
       font-family: var(--font-body);
       font-weight: 300;
       letter-spacing: 0.04em;
@@ -273,7 +268,7 @@ body {
 
   & .cell-content {
     flex: 1;
-    padding: 1rem 1.1rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.4em;
@@ -281,14 +276,13 @@ body {
   }
 
   & h3 {
-    font-size: clamp(0.9rem, 2.2vh, 1.4rem);
-    font-weight: 400;
-    font-style: italic;
+    font-size: calc(var(--fs) * 2);
+    font-weight: 700;
     letter-spacing: 0.02em;
   }
 
   & p {
-    font-size: clamp(0.75rem, 1.7vh, 1rem);
+    font-size: calc(var(--fs) * 1.55);
     font-weight: 300;
     line-height: 1.6;
     color: color-mix(in srgb, var(--clr-text) 70%, transparent);
@@ -302,5 +296,5 @@ body {
   height: 100vh;
   margin-top: calc(-1 * (100vh - var(--cell-h)) / 2);
   margin-inline: var(--divider-margin);
-  border-left: 1px dashed var(--clr-border);
+  border-left: 2px dashed var(--clr-border);
 }
