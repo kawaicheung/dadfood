@@ -15,6 +15,7 @@
 
   --font-body: 'Google Sans', sans-serif;
   --fs: clamp(0.5rem, 1.1vh, 0.7rem);
+  --guidepost-h: 2.2rem;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
@@ -33,7 +34,6 @@ body {
   overflow-y: hidden;
   display: flex;
   align-items: center;
-  padding-inline: 6vw;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: var(--clr-border) transparent;
@@ -48,9 +48,10 @@ body {
   display: flex;
   align-items: stretch;
   gap: var(--gap-section);
-  height: var(--cell-h);
+  height: calc(var(--cell-h) + var(--guidepost-h));
   flex-shrink: 0;
-  padding: 1rem;
+  padding-inline: 1rem;
+  padding-bottom: 1rem;
 }
 
 /* ─── Sections ───────────────────────────────────────────────────────────── */
@@ -58,22 +59,26 @@ body {
   position: relative;
   height: 100%;
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
+  align-items: flex-start;
   flex-shrink: 0;
+  border: solid 1px green;
 }
 
 .guidepost {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(calc(-100% - 10px));
+  position: sticky;
+  left: var(--divider-margin);
+  height: var(--guidepost-h);
+  display: flex;
+  align-items: center;
+  align-self: stretch;
   white-space: nowrap;
-  font-size: calc(var(--fs) * 2);
+  width: fit-content;
+  font-size: calc(var(--fs) * 2.5);
+  letter-spacing: -0.05rem;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--clr-text);
-  display: flex;
-  align-items: baseline;
   gap: 0.5em;
 
   & .time-label {
@@ -109,7 +114,8 @@ body {
 .gather-block {
   display: flex;
   align-items: stretch;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   flex-shrink: 0;
 
   & .img-block {
@@ -143,7 +149,8 @@ body {
 /* ─── Images ─────────────────────────────────────────────────────────────── */
 .img-block {
   width: var(--img-w);
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   flex-shrink: 0;
   overflow: hidden;
 
@@ -158,14 +165,16 @@ body {
 /* ─── Grid & cells ───────────────────────────────────────────────────────── */
 .grid {
   display: flex;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   gap: var(--gap-cell);
   flex-shrink: 0;
 }
 
 .cell {
   width: var(--cell-w);
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -177,6 +186,7 @@ body {
 
   &.cell--intro {
     width: var(--cell-w);
+    margin-left: 10vw;
   }
 
   &:hover { background: #ddd4c6; }
