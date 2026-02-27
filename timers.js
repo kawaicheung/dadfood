@@ -19,6 +19,8 @@
   const pageEl   = document.querySelector('.page');
   const allCells = [...document.querySelectorAll('.section .cell')];
 
+  const COMPLETE = 'is-complete';
+
   const centerCell = (cell) => {
     if (!cell) return;
     const pageRect = pageEl.getBoundingClientRect();
@@ -31,16 +33,40 @@
   };
 
   const updateCurrent = () => {
-    const first = allCells.find(c => !c.classList.contains('is-complete'));
+    const first = allCells.find(c => !c.classList.contains(COMPLETE));
     allCells.forEach(c => c.classList.toggle('is-current', c === first));
     return first;
   };
 
-  // Mark everything before i complete, everything from i onward incomplete
+  const dividerMargin = () =>
+    parseFloat(getComputedStyle(document.documentElement)
+      .getPropertyValue('--divider-margin')) || 20;
+
+  // The section after the last cell-containing section
+  const lastCellSection = allCells[allCells.length - 1]?.closest('.section');
+  const nextSection = lastCellSection?.nextElementSibling?.classList.contains('section')
+    ? lastCellSection.nextElementSibling
+    : lastCellSection?.nextElementSibling?.nextElementSibling; // skip .divider
+
+  const scrollToNextSection = () => {
+    if (!nextSection) return;
+    const pageRect = pageEl.getBoundingClientRect();
+    const sectionRect = nextSection.getBoundingClientRect();
+    pageEl.scrollTo({
+      left: pageEl.scrollLeft + sectionRect.left - pageRect.left - dividerMargin(),
+      behavior: 'smooth',
+    });
+  };
+
   const setCurrentAt = (i) => {
-    allCells.slice(0, i).forEach(c => c.classList.add('is-complete'));
-    allCells.slice(i).forEach(c => c.classList.remove('is-complete'));
-    centerCell(updateCurrent());
+    allCells.slice(0, i).forEach(c => c.classList.add(COMPLETE));
+    allCells.slice(i).forEach(c => c.classList.remove(COMPLETE));
+    const current = updateCurrent();
+    if (current) {
+      centerCell(current);
+    } else {
+      scrollToNextSection();
+    }
   };
 
   allCells.forEach((cell, i) => {
@@ -48,7 +74,7 @@
     if (!btn) return;
 
     btn.addEventListener('click', () => {
-      const next = cell.classList.contains('is-complete') ? i : i + 1;
+      const next = cell.classList.contains(COMPLETE) ? i : i + 1;
       setCurrentAt(next);
     });
 
@@ -58,32 +84,20 @@
     });
   });
 
-  updateCurrent();
-
-  // ─── Sticky guideposts ────────────────────────────────────────────────────
-  const sections = [...document.querySelectorAll('.section')];
-
-  const tops = sections.map(s => {
-    const gp = s.querySelector('.guidepost');
-    return gp ? gp.getBoundingClientRect().top : 0;
+  // ─── Section scroll (Gather + Serve) ─────────────────────────────────────
+  document.querySelectorAll('[data-scroll-section]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const section = el.closest('.section');
+      if (!section) return;
+      const pageRect = pageEl.getBoundingClientRect();
+      const sectionRect = section.getBoundingClientRect();
+      pageEl.scrollTo({
+        left: pageEl.scrollLeft + sectionRect.left - pageRect.left - dividerMargin(),
+        behavior: 'smooth',
+      });
+    });
   });
 
-  const stickLeft = () =>
-    parseFloat(getComputedStyle(document.documentElement)
-      .getPropertyValue('--divider-margin')) || 20;
+  updateCurrent();
 
-  const update = () => {
-    const threshold = pageEl.getBoundingClientRect().left + stickLeft();
-    sections.forEach((section, i) => {
-      const gp = section.querySelector('.guidepost');
-      if (!gp || gp.classList.contains('is-fixed')) return;
-      if (section.getBoundingClientRect().left <= threshold) {
-        gp.style.setProperty('--guidepost-top', tops[i] + 'px');
-        gp.classList.add('is-fixed');
-      }
-    });
-  };
-
-  pageEl.addEventListener('scroll', update, { passive: true });
-  update();
 })();
